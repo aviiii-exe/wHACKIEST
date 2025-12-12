@@ -13,7 +13,8 @@ export default function HeroCarousel({ sites }) {
   }, [sites.length]);
 
   return (
-    <div className="relative w-full h-64 overflow-hidden rounded-b-3xl shadow-xl">
+    // CHANGE 1: Changed h-64 to h-[60vh] to make it BIG like your sketch
+    <div className="relative w-full h-[60vh] overflow-hidden rounded-b-[3rem] shadow-2xl">
       <AnimatePresence mode='wait'>
         <motion.img
           key={index}
@@ -27,20 +28,23 @@ export default function HeroCarousel({ sites }) {
         />
       </AnimatePresence>
       
-      {/* Overlay Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-hampi-stone/90 to-transparent flex items-end p-6">
-        <div>
-            <span className="text-hampi-gold text-xs font-bold tracking-widest uppercase mb-1 block">Featured Site</span>
-            <h2 className="text-white text-3xl font-serif font-bold">{sites[index].name}</h2>
+      {/* CHANGE 2: Darker gradient from Top so white text pops */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-transparent to-black/60 flex items-end p-8">
+        <div className="mb-8">
+            <span className="text-brand-accent text-xs font-bold tracking-widest uppercase mb-2 block bg-white/10 w-fit px-2 py-1 rounded backdrop-blur-md">
+              Featured Site
+            </span>
+            <h2 className="text-white text-4xl font-serif font-bold leading-tight">{sites[index].name}</h2>
+            <p className="text-white/80 text-sm mt-2 max-w-xs line-clamp-2">{sites[index].description}</p>
         </div>
       </div>
       
       {/* Dots */}
-      <div className="absolute bottom-4 right-4 flex space-x-1">
+      <div className="absolute bottom-6 right-6 flex space-x-2">
         {sites.map((_, i) => (
           <div 
             key={i} 
-            className={`w-2 h-2 rounded-full transition-all ${i === index ? 'bg-hampi-gold w-4' : 'bg-white/50'}`} 
+            className={`transition-all duration-300 rounded-full shadow-lg ${i === index ? 'bg-brand-accent w-8 h-2' : 'bg-white/50 w-2 h-2'}`} 
           />
         ))}
       </div>

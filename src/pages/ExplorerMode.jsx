@@ -1,28 +1,23 @@
 import React from 'react';
 import sites from '../data/sites.json';
 import HeroCarousel from '../components/HeroCarousel';
-import { MapPin, ArrowRight } from 'lucide-react';
+import { ArrowRight, Bot } from 'lucide-react';
 
 export default function ExplorerMode() {
   return (
     <div className="pb-20">
       
-      {/* 1. HERO SECTION (Behind the Glass Nav) */}
-      <div className="relative">
+      {/* 1. HERO SECTION */}
+      <div className="relative z-0">
         <HeroCarousel sites={sites} />
-        
-        {/* "Welcome Aayush" Overlay (As per sketch) */}
-        <div className="absolute top-24 left-6 z-10">
-          <p className="text-white/90 text-sm font-bold uppercase tracking-wider shadow-black drop-shadow-md">Good Evening,</p>
-          <h1 className="text-white text-4xl font-serif font-black drop-shadow-lg">Aayush</h1>
-        </div>
+        {/* Greeting removed from here - it is now in App.jsx header */}
       </div>
 
       {/* 2. PLACES NEARBY (Horizontal Slider) */}
-      <div className="mt-8 pl-6">
+      <div className="mt-8 pl-6 relative z-10">
         <div className="flex justify-between items-end pr-6 mb-4">
           <h3 className="text-brand-dark text-xl font-bold font-serif">Places near by</h3>
-          <span className="text-brand-accent text-xs font-bold uppercase cursor-pointer">View All</span>
+          <span className="text-brand-accent text-xs font-bold uppercase cursor-pointer hover:underline">View All</span>
         </div>
         
         {/* Horizontal Slider Container */}
@@ -30,7 +25,7 @@ export default function ExplorerMode() {
           {sites.map((site) => (
             <div 
               key={site.id} 
-              className="min-w-[220px] bg-brand-card rounded-2xl p-3 shadow-lg flex-shrink-0 snap-center border border-brand-dark/5"
+              className="min-w-[220px] bg-brand-card rounded-2xl p-3 shadow-lg flex-shrink-0 snap-center border border-brand-dark/5 hover:scale-[1.02] transition-transform duration-300"
             >
               {/* Card Image */}
               <div className="h-32 w-full rounded-xl overflow-hidden mb-3 relative">
@@ -46,7 +41,7 @@ export default function ExplorerMode() {
               
               {/* Action Button */}
               <div className="mt-3 flex justify-between items-center">
-                 <button className="bg-brand-accent text-white w-full py-2 rounded-lg text-sm font-bold shadow-md active:scale-95 transition flex justify-center items-center gap-2">
+                 <button className="bg-brand-accent text-white w-full py-2 rounded-lg text-sm font-bold shadow-md active:scale-95 transition flex justify-center items-center gap-2 hover:bg-[#ff8547]">
                     Start Quest <ArrowRight size={14} />
                  </button>
               </div>
@@ -55,10 +50,10 @@ export default function ExplorerMode() {
         </div>
       </div>
 
-       {/* Floating Chatbot (Keep this as per previous request) */}
-       <div className="fixed bottom-6 right-6 z-40">
-        <button className="w-14 h-14 bg-brand-dark text-brand-bg rounded-full shadow-2xl flex items-center justify-center border-2 border-brand-accent hover:scale-110 transition">
-             <span className="text-2xl">🤖</span>
+       {/* Floating Chatbot */}
+       <div className="fixed bottom-6 right-6 z-40 animate-bounce-slow">
+        <button className="w-14 h-14 bg-brand-dark text-brand-bg rounded-full shadow-2xl flex items-center justify-center border-2 border-brand-accent hover:scale-110 transition group">
+             <Bot size={28} className="group-hover:rotate-12 transition-transform" />
         </button>
       </div>
 
