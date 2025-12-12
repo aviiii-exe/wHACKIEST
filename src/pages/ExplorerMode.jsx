@@ -1,4 +1,5 @@
 import React from 'react';
+import Chatbot from '../components/Chatbot';
 import sites from '../data/sites.json';
 import HeroCarousel from '../components/HeroCarousel';
 import { ArrowRight, Bot, Star } from 'lucide-react';
@@ -64,12 +65,8 @@ export default function ExplorerMode() {
       {/* 3. SLIDER 2: ACTIVITIES NEARBY (New!) */}
       <SectionSlider title="Activities nearby" items={activities} isActivity={true} />
 
-       {/* Floating Chatbot */}
-       <div className="fixed bottom-6 right-6 z-40 animate-bounce-slow">
-        <button className="w-14 h-14 bg-brand-dark text-brand-bg rounded-full shadow-2xl flex items-center justify-center border-2 border-brand-accent hover:scale-110 transition group">
-             <Bot size={28} className="group-hover:rotate-12 transition-transform" />
-        </button>
-      </div>
+      {/* The new Pill Button */}
+      <Chatbot />
 
     </div>
   );
