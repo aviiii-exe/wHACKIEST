@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { Outlet, Link, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Map, FolderOpen, LogOut } from 'lucide-react';
+import { LayoutDashboard, Map, FolderOpen, LogOut, Sparkles } from 'lucide-react';
+import { migrateData } from '../../lib/migrate';
 
 export default function AdminLayout() {
     const location = useLocation();
@@ -22,6 +23,9 @@ export default function AdminLayout() {
                     <h1 className="text-xl font-black bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
                         Admin Panel
                     </h1>
+                    <button onClick={() => migrateData().then(alert)} className="mt-2 text-xs text-gray-400 hover:text-black underline cursor-pointer">
+                        Migrate Mock Data
+                    </button>
                 </div>
 
                 <nav className="flex-1 p-4 space-y-2">
