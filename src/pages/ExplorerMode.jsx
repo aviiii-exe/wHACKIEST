@@ -1,20 +1,21 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import sites from '../data/sites.json';
 import HeroCarousel from '../components/HeroCarousel';
+
 import SectionSlider from '../components/SectionSlider';
 import QuestCard from '../components/QuestCard';
 import { useGamification } from '../context/GamificationContext';
 import { Bot, Map } from 'lucide-react';
+
 import Chatbot from '../components/Chatbot';
-import PlaceDetailModal from '../components/PlaceDetailModal';
 import { ArrowRight, Star } from 'lucide-react';
+
+
 import { useGeolocation } from '../hooks/useGeolocation';
 import { calculateDistance } from '../utils/distance';
 
 export default function ExplorerMode() {
-  const [selectedPlace, setSelectedPlace] = useState(null);
   const location = useGeolocation();
-  const chatbotRef = useRef(null);
 
   const calculateSiteDistance = (site) => {
     if (location.loaded && !location.error && location.coordinates.lat && location.coordinates.lng) {
@@ -47,12 +48,8 @@ export default function ExplorerMode() {
     return aCompleted ? 1 : -1;
   });
 
-  const handlePlanItinerary = (placeName) => {
-    setSelectedPlace(null);
-    if (chatbotRef.current) {
-      chatbotRef.current.openWithQuery(`Plan a trip to ${placeName}`);
-    }
-  };
+
+
 
   return (
     <div className="pb-24 bg-white">
@@ -68,11 +65,9 @@ export default function ExplorerMode() {
         <HeroCarousel sites={places} />
       </div>
 
-      <SectionSlider
-        title="Places to visit"
-        items={places}
-        onSelect={(place) => setSelectedPlace(place)}
-      />
+      <SectionSlider title="Places to visit" items={places} />
+
+
 
       {/* Active Quests Section - Horizontal Scroll */}
       <div className="py-8 px-6">
@@ -99,20 +94,9 @@ export default function ExplorerMode() {
         </div>
       </div>
 
-      <SectionSlider
-        title="Activities nearby"
-        items={activities}
-        isActivity={true}
-        onSelect={(place) => setSelectedPlace(place)}
-      />
+      <SectionSlider title="Activities nearby" items={activities} isActivity={true} />
 
-      <Chatbot ref={chatbotRef} />
-
-      <PlaceDetailModal
-        place={selectedPlace}
-        onClose={() => setSelectedPlace(null)}
-        onPlanItinerary={handlePlanItinerary}
-      />
+      <Chatbot />
     </div>
   );
 }
