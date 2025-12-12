@@ -37,7 +37,6 @@ export default function ExplorerMode() {
       </div>
 
       <SectionSlider title="Places near by" items={places} />
-      <SectionSlider title="Places near by" items={places} />
 
       {/* Active Quests Section - Horizontal Scroll */}
       <div className="py-8 px-6">
@@ -48,7 +47,7 @@ export default function ExplorerMode() {
 
         <div className="overflow-x-auto pb-8 -mx-6 px-6 no-scrollbar flex gap-6 snap-x snap-mandatory">
           {availableQuests.map(quest => (
-            <div key={quest.id} className="snap-center shrink-0">
+            <div key={quest.id} className="snap-center shrink-0 flex">
               <QuestCard
                 quest={quest}
                 isCompleted={false}
