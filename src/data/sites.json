@@ -2,34 +2,100 @@
   {
     "id": 1,
     "name": "Virupaksha Temple",
-    "type": "Temple",
+    "category": "place",
     "description": "The main center of pilgrimage at Hampi. Dedicated to Lord Shiva.",
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Virupaksha_Temple_in_Hampi.jpg/640px-Virupaksha_Temple_in_Hampi.jpg",
     "distance": "0.5 km",
-    "status": "unlocked",
-    "coordinates": { "lat": 15.3350, "lng": 76.4600 },
     "xp": 100
   },
   {
     "id": 2,
     "name": "Vittala Temple",
-    "type": "Ruins",
+    "category": "place",
     "description": "Famous for its Stone Chariot and musical pillars. An architectural masterpiece.",
     "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Stone_Chariot_Hampi.jpg/640px-Stone_Chariot_Hampi.jpg",
     "distance": "2.1 km",
-    "status": "locked",
-    "coordinates": { "lat": 15.3480, "lng": 76.4750 },
     "xp": 500
   },
   {
     "id": 3,
-    "name": "Matanga Hill",
-    "type": "Viewpoint",
-    "description": "The highest point in Hampi, offering a stunning sunrise view over the ruins.",
-    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Matanga_Hill_Hampi.jpg/640px-Matanga_Hill_Hampi.jpg",
-    "distance": "1.2 km",
-    "status": "unlocked",
-    "coordinates": { "lat": 15.3300, "lng": 76.4650 },
+    "name": "Elephant Stables",
+    "category": "place",
+    "description": "A grand structure used to house the royal elephants.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Elephant_Stables_Hampi.jpg/640px-Elephant_Stables_Hampi.jpg",
+    "distance": "3.5 km",
+    "xp": 300
+  },
+  {
+    "id": 4,
+    "name": "Lotus Mahal",
+    "category": "place",
+    "description": "A pleasant blend of Hindu and Islamic architectural styles.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Lotus_Mahal_Hampi.jpg/640px-Lotus_Mahal_Hampi.jpg",
+    "distance": "3.8 km",
+    "xp": 350
+  },
+  {
+    "id": 5,
+    "name": "Queens Bath",
+    "category": "place",
+    "description": "A massive bath complex used by the royals of Vijayanagara.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Queen%27s_Bath_Hampi.jpg/640px-Queen%27s_Bath_Hampi.jpg",
+    "distance": "4.0 km",
+    "xp": 200
+  },
+  {
+    "id": 6,
+    "name": "Coracle Ride",
+    "category": "activity",
+    "description": "Experience a traditional round boat ride on the Tungabhadra river.",
+    "image": "https://thumbs.dreamstime.com/b/coracle-boats-tungabhadra-river-hampi-karnataka-india-february-traditional-bound-bamboo-plastic-bitumen-31586520.jpg",
+    "distance": "1.0 km",
     "xp": 150
+  },
+  {
+    "id": 7,
+    "name": "Sunset Bouldering",
+    "category": "activity",
+    "description": "Climb the massive boulders of Hampi Island for a perfect view.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Matanga_Hill_Hampi.jpg/640px-Matanga_Hill_Hampi.jpg",
+    "distance": "1.5 km",
+    "xp": 400
+  },
+  {
+    "id": 8,
+    "name": "Heritage Cycling",
+    "category": "activity",
+    "description": "Rent a cycle and tour the ruins at your own pace.",
+    "image": "https://live.staticflickr.com/7418/16436979601_875417855b_b.jpg",
+    "distance": "0.2 km",
+    "xp": 100
+  },
+  {
+    "id": 9,
+    "name": "Cliff Jumping",
+    "category": "activity",
+    "description": "Adrenaline rush at Sanapur Lake (Check water levels first!).",
+    "image": "https://img.traveltriangle.com/blog/wp-content/uploads/2019/09/Cliff-Jumping1.jpg",
+    "distance": "5.5 km",
+    "xp": 600
+  },
+  {
+    "id": 10,
+    "name": "Night Market Walk",
+    "category": "activity",
+    "description": "Explore the vibrant Hampi Bazaar street in the evening.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/f/f6/Hampi_Bazaar.jpg/640px-Hampi_Bazaar.jpg",
+    "distance": "0.5 km",
+    "xp": 50
+  },
+  {
+    "id": 11,
+    "name": "Cave Exploration",
+    "category": "activity",
+    "description": "Find hidden shrines inside the Sugriva's Cave.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/9/90/Sugriva%27s_Cave.jpg",
+    "distance": "1.8 km",
+    "xp": 250
   }
 ]
