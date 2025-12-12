@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "name": "Virupaksha Temple",
+    "type": "Temple",
+    "description": "The main center of pilgrimage at Hampi. Dedicated to Lord Shiva.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Virupaksha_Temple_in_Hampi.jpg/640px-Virupaksha_Temple_in_Hampi.jpg",
+    "distance": "0.5 km",
+    "status": "unlocked",
+    "coordinates": { "lat": 15.3350, "lng": 76.4600 },
+    "xp": 100
+  },
+  {
+    "id": 2,
+    "name": "Vittala Temple",
+    "type": "Ruins",
+    "description": "Famous for its Stone Chariot and musical pillars. An architectural masterpiece.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/15/Stone_Chariot_Hampi.jpg/640px-Stone_Chariot_Hampi.jpg",
+    "distance": "2.1 km",
+    "status": "locked",
+    "coordinates": { "lat": 15.3480, "lng": 76.4750 },
+    "xp": 500
+  },
+  {
+    "id": 3,
+    "name": "Matanga Hill",
+    "type": "Viewpoint",
+    "description": "The highest point in Hampi, offering a stunning sunrise view over the ruins.",
+    "image": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Matanga_Hill_Hampi.jpg/640px-Matanga_Hill_Hampi.jpg",
+    "distance": "1.2 km",
+    "status": "unlocked",
+    "coordinates": { "lat": 15.3300, "lng": 76.4650 },
+    "xp": 150
+  }
+]
