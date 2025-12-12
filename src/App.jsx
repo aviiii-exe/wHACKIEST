@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import ExplorerMode from './pages/ExplorerMode';
+// 1. IMPORT THE NEW COMPONENT & DATA
+import FogMap from './components/FogMap'; 
+import sites from './data/sites.json'; 
 import { Settings, LogOut } from 'lucide-react';
 
-// Placeholders for other pages
-const Wanderer = () => <div className="pt-32 text-center font-bold text-brand-dark text-2xl">🗺️ Wanderer Map Loading...</div>;
 const Profile = () => <div className="pt-32 text-center font-bold text-brand-dark text-2xl">👤 User Profile Loading...</div>;
 
 function TopHeader() {
@@ -12,7 +13,6 @@ function TopHeader() {
   const isActive = (path) => location.pathname === path;
   const [showLogout, setShowLogout] = useState(false);
 
-  // Nav Pill Styles
   const navItemClass = (path) => 
     `px-6 py-2 rounded-full text-sm font-bold transition-all duration-300 ${
       isActive(path) 
@@ -22,15 +22,12 @@ function TopHeader() {
 
   return (
     <div className="fixed top-0 left-0 right-0 z-50 px-6 py-6 flex justify-between items-start pointer-events-none">
-      
-      {/* 1. LEFT: Greeting (Wrapped in pointer-events-auto so you can select text) */}
       <div className="pointer-events-auto mt-1">
         <p className="text-white/80 text-xs font-bold uppercase tracking-wider drop-shadow-md">Good Evening,</p>
         <h1 className="text-white text-3xl font-serif font-black drop-shadow-lg leading-tight">Aayush</h1>
       </div>
 
-      {/* 2. CENTER: Navigation Pills (Explorer | Wanderer | Profile) */}
-      <div className="pointer-events-auto absolute left-1/2 transform -translate-x-1/2 top-6">
+      <div className="pointer-events-autoVE absolute left-1/2 transform -translate-x-1/2 top-6">
         <nav className="flex space-x-1 bg-white/30 backdrop-blur-xl border border-white/40 rounded-full p-1.5 shadow-2xl">
           <Link to="/" className={navItemClass('/')}>Explore</Link>
           <Link to="/wanderer" className={navItemClass('/wanderer')}>Wanderer</Link>
@@ -38,7 +35,6 @@ function TopHeader() {
         </nav>
       </div>
 
-      {/* 3. RIGHT: Settings Circular Button */}
       <div className="pointer-events-auto relative">
         <button 
             onClick={() => setShowLogout(!showLogout)}
@@ -46,10 +42,8 @@ function TopHeader() {
         >
           <Settings size={22} />
         </button>
-
-        {/* Dropdown Menu */}
         {showLogout && (
-            <div className="absolute right-0 top-14 w-32 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden py-1 animate-in fade-in slide-in-from-top-2">
+            <div className="absolute right-0 top-14 w-32 bg-white rounded-xl shadow-2xl border border-gray-100 overflow-hidden py-1">
                 <button className="w-full text-left px-4 py-3 text-red-500 text-sm font-bold hover:bg-red-50 flex items-center gap-2">
                     <LogOut size={14} /> Log Out
                 </button>
@@ -67,7 +61,13 @@ export default function App() {
         <TopHeader />
         <Routes>
           <Route path="/" element={<ExplorerMode />} />
-          <Route path="/wanderer" element={<Wanderer />} />
+          {/* 2. USE THE FOGMAP COMPONENT HERE */}
+          {/* We wrap it in h-screen to make sure the map takes the full height */}
+          <Route path="/wanderer" element={
+            <div className="h-screen w-full absolute inset-0 z-0">
+               <FogMap quests={sites} />
+            </div>
+          } />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
