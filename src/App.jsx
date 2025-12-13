@@ -12,11 +12,15 @@ import SiteManager from './pages/Admin/SiteManager';
 import AIGameMaster from './pages/Admin/AIGameMaster';
 import { GamificationProvider } from './context/GamificationContext';
 import { ThemeProvider } from './context/ThemeContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 
 // 1. Protected Route Wrapper
 const ProtectedRoute = () => {
-  const isAuthenticated = localStorage.getItem('isAuthenticated') === 'true';
-  return isAuthenticated ? <Outlet /> : <Navigate to="/auth" replace />;
+  const { user, loading } = useAuth();
+
+  if (loading) return <div className="min-h-screen flex items-center justify-center bg-[#FAF3E1]">Loading...</div>;
+
+  return user ? <Outlet /> : <Navigate to="/auth" replace />;
 };
 
 // 2. Layout Wrapper (Renders Header + Content)
@@ -33,36 +37,38 @@ export default function App() {
   return (
     <GamificationProvider>
       <ThemeProvider>
-        <Router>
-          <div className="min-h-screen bg-brand-bg text-brand-dark dark:bg-brand-dark-bg dark:text-brand-dark-text font-sans selection:bg-brand-accent selection:text-white transition-colors duration-300">
-            <Routes>
-              {/* Public Route: Auth */}
-              <Route path="/auth" element={<Auth />} />
+        <AuthProvider>
+          <Router>
+            <div className="min-h-screen bg-brand-bg text-brand-dark dark:bg-brand-dark-bg dark:text-brand-dark-text font-sans selection:bg-brand-accent selection:text-white transition-colors duration-300">
+              <Routes>
+                {/* Public Route: Auth */}
+                <Route path="/auth" element={<Auth />} />
 
 
-              {/* Protected Routes (Wrapped in MainLayout) */}
-              <Route element={<ProtectedRoute />}>
-                <Route path="/onboarding" element={<Onboarding />} />
-                <Route element={<MainLayout />}>
-                  <Route path="/" element={<ExplorerMode />} />
-                  <Route path="/wanderer" element={<FogMap />} />
-                  <Route path="/profile" element={<Profile />} />
+                {/* Protected Routes (Wrapped in MainLayout) */}
+                <Route element={<ProtectedRoute />}>
+                  <Route path="/onboarding" element={<Onboarding />} />
+                  <Route element={<MainLayout />}>
+                    <Route path="/" element={<ExplorerMode />} />
+                    <Route path="/wanderer" element={<FogMap />} />
+                    <Route path="/profile" element={<Profile />} />
+                  </Route>
+
+                  {/* Admin Routes */}
+                  <Route path="/admin" element={<AdminLayout />}>
+                    <Route index element={<Navigate to="quests" replace />} />
+                    <Route path="quests" element={<QuestManager />} />
+                    <Route path="sites" element={<SiteManager />} />
+                    <Route path="ai-master" element={<AIGameMaster />} />
+                  </Route>
                 </Route>
 
-                {/* Admin Routes */}
-                <Route path="/admin" element={<AdminLayout />}>
-                  <Route index element={<Navigate to="quests" replace />} />
-                  <Route path="quests" element={<QuestManager />} />
-                  <Route path="sites" element={<SiteManager />} />
-                  <Route path="ai-master" element={<AIGameMaster />} />
-                </Route>
-              </Route>
-
-              {/* Catch all redirect */}
-              <Route path="*" element={<Navigate to="/" replace />} />
-            </Routes>
-          </div>
-        </Router>
+                {/* Catch all redirect */}
+                <Route path="*" element={<Navigate to="/" replace />} />
+              </Routes>
+            </div>
+          </Router>
+        </AuthProvider>
       </ThemeProvider>
     </GamificationProvider>
   );

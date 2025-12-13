@@ -92,10 +92,26 @@ export function GamificationProvider({ children }) {
         return { xp: awardedXp, badge: quest.badge, stamps: quest.stamps };
     };
 
-    const updateProfile = (profileData) => {
+    const updateProfile = async (profileData) => {
         const newProfile = { ...userProfile, ...profileData };
         setUserProfile(newProfile);
         localStorage.setItem('hampi_user_profile', JSON.stringify(newProfile));
+
+        // Save to Supabase
+        const { data: { user } } = await supabase.auth.getUser();
+        if (user) {
+            const { error } = await supabase
+                .from('profiles')
+                .update({
+                    username: profileData.username,
+                    gender: profileData.gender,
+                    birthdate: profileData.dob ? new Date(profileData.dob) : null,
+                    avatar_url: profileData.avatar // Assuming avatar is emoji or URL
+                })
+                .eq('id', user.id);
+
+            if (error) console.error('Error updating profile in Supabase:', error);
+        }
     };
 
     const generateNewQuest = async (currentCompleted) => {
