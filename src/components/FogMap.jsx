@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import maplibregl from 'maplibre-gl';
 import 'maplibre-gl/dist/maplibre-gl.css';
 import { Navigation, MapPin, Search, X, Crosshair, ArrowUp, ArrowRight, ArrowLeft, Loader2 } from 'lucide-react';
@@ -25,8 +26,44 @@ const FogMap = () => {
   // Default start: Hampi
   const START_LOCATION = [76.4600, 15.3350];
 
+  // Get location state (passed from ExplorerMode)
+  const location = useLocation();
+
+  useEffect(() => {
+    // If we have a target place passed via navigation state
+    if (location.state?.targetPlace) {
+      const place = location.state.targetPlace;
+
+      // Auto-select this place
+      const lat = parseFloat(place.lat);
+      const lon = parseFloat(place.lng); // Note: sites.json uses 'lng', nominatim was 'lon'
+      const coords = [lon, lat];
+
+      setDestination({
+        name: place.name,
+        fullAddress: place.description || place.name, // Fallback
+        coords: coords
+      });
+
+      setSearchQuery(place.name);
+
+      // Fly to location
+      if (mapInstance.current) {
+        mapInstance.current.flyTo({ center: coords, zoom: 16 });
+      }
+
+      // Clear state so it doesn't persist on refresh (optional, but good practice)
+      window.history.replaceState({}, document.title);
+    }
+  }, [location]);
+
   useEffect(() => {
     if (mapInstance.current) return;
+
+    // Check if we have a target place initially to center map there instead of default
+    const initialCenter = location.state?.targetPlace
+      ? [location.state.targetPlace.lng, location.state.targetPlace.lat]
+      : START_LOCATION;
 
     const map = new maplibregl.Map({
       container: mapContainer.current,
@@ -48,7 +85,7 @@ const FogMap = () => {
           }
         ]
       },
-      center: START_LOCATION,
+      center: initialCenter,
       zoom: 14,
       pitch: 0,
     });
