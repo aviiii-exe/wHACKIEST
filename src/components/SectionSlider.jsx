@@ -1,7 +1,7 @@
 import React from 'react';
 import { ArrowRight, Star, Heart } from 'lucide-react';
 
-export default function SectionSlider({ title, items, isActivity = false, onSelect, icon: Icon, theme = 'orange' }) {
+export default function SectionSlider({ title, items, isActivity = false, onItemClick, icon: Icon, theme = 'orange' }) {
 
     const themes = {
         orange: { bg: 'bg-orange-100', text: 'text-orange-600', border: 'border-orange-200' },
@@ -28,7 +28,7 @@ export default function SectionSlider({ title, items, isActivity = false, onSele
             </div>
 
             <div className="flex overflow-x-auto gap-5 pb-8 pr-6 snap-x hide-scrollbar">
-                {items.map((item) => (
+                {items && items.map((item) => (
                     <div
                         key={item.id}
                         // INCREASED HEIGHT: min-w is now 240px, and image height is h-40
@@ -37,7 +37,7 @@ export default function SectionSlider({ title, items, isActivity = false, onSele
                         <div>
                             {/* Image Section (Taller now: h-40) */}
                             <div className="h-40 w-full rounded-xl overflow-hidden mb-3 relative">
-                                <img src={item.image} className="w-full h-full object-cover" alt="" />
+                                <img src={item.image} className="w-full h-full object-cover" alt={item.name} />
                                 <div className="absolute top-2 right-2 flex gap-2">
                                     <div className="bg-brand-dark/70 text-brand-bg text-[10px] px-2 py-1 rounded-full backdrop-blur-sm flex items-center gap-1">
                                         {isActivity && <Star size={8} className="text-yellow-400 fill-yellow-400" />}
@@ -57,7 +57,7 @@ export default function SectionSlider({ title, items, isActivity = false, onSele
                         {/* Action Button */}
                         <div className="mt-4">
                             <button
-                                onClick={() => onSelect && onSelect(item)}
+                                onClick={() => onItemClick && onItemClick(item)}
                                 className={`w-full py-2 rounded-lg text-sm font-bold shadow-md active:scale-95 transition flex justify-center items-center gap-2 ${isActivity ? 'bg-brand-dark text-white' : 'bg-brand-accent text-white hover:bg-[#ff8547]'}`}
                             >
                                 {isActivity ? 'Book Now' : 'More Details'} <ArrowRight size={14} />
