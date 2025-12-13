@@ -11,7 +11,7 @@ export const generateGameContent = async (prompt, type = 'quest') => {
         throw new Error("Gemini API Key is missing. Please add VITE_GEMINI_API_KEY to your .env file.");
     }
 
-    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
 
     let schemaPrompt = "";
     if (type === 'quest') {
