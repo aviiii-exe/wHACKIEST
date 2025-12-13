@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, Outlet } from 'react-router-dom';
+import LandingPage from './pages/LandingPage';
 import ExplorerMode from './pages/ExplorerMode';
 import FogMap from './components/FogMap';
 import Header from './components/Header';
@@ -41,15 +42,15 @@ export default function App() {
           <Router>
             <div className="min-h-screen bg-brand-bg text-brand-dark dark:bg-brand-dark-bg dark:text-brand-dark-text font-sans selection:bg-brand-accent selection:text-white transition-colors duration-300">
               <Routes>
-                {/* Public Route: Auth */}
+                {/* Public Routes */}
+                <Route path="/" element={<LandingPage />} />
                 <Route path="/auth" element={<Auth />} />
-
 
                 {/* Protected Routes (Wrapped in MainLayout) */}
                 <Route element={<ProtectedRoute />}>
                   <Route path="/onboarding" element={<Onboarding />} />
                   <Route element={<MainLayout />}>
-                    <Route path="/" element={<ExplorerMode />} />
+                    <Route path="/explore" element={<ExplorerMode />} />
                     <Route path="/wanderer" element={<FogMap />} />
                     <Route path="/profile" element={<Profile />} />
                   </Route>

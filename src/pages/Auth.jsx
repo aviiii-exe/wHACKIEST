@@ -23,7 +23,7 @@ export default function Auth() {
                     password: formData.password
                 });
                 if (error) throw error;
-                navigate('/');
+                navigate('/explore');
             } else {
                 const { data, error } = await signUp({
                     email: formData.email,

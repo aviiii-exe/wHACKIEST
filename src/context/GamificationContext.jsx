@@ -102,13 +102,15 @@ export function GamificationProvider({ children }) {
         if (user) {
             const { error } = await supabase
                 .from('profiles')
-                .update({
+                .upsert({
+                    id: user.id,
+                    email: user.email,
                     username: profileData.username,
                     gender: profileData.gender,
-                    birthdate: profileData.dob ? new Date(profileData.dob) : null,
-                    avatar_url: profileData.avatar // Assuming avatar is emoji or URL
-                })
-                .eq('id', user.id);
+                    birthdate: profileData.dob, // Pass YYYY-MM-DD string directly
+                    avatar_url: profileData.avatar,
+                    updated_at: new Date()
+                });
 
             if (error) console.error('Error updating profile in Supabase:', error);
         }
